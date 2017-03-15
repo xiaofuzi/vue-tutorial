@@ -53,8 +53,97 @@ Vue.js（读音 /vjuː/，类似于 view） 是一套构建用户界面的渐进
 本书采用的开发环境：
 
 * [编辑器 - sublime text3](http://www.sublimetext.com/3)
-* [构建工具 - webpack2.2](https://webpack.js.org/concepts/)
+* [Nodejs(v6.9.4)](http://nodejs.cn)
 * [包管理 - npm(yarn)](https://docs.npmjs.com)
-* [Nodejs v6.9.4](http://nodejs.cn)
+* [构建工具 - webpack2.2](https://webpack.js.org/concepts/)
 * [版本控制 - git](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/)
 * [源码托管 - github](www.github.com)
+* [代码校验 - esLint](http://eslint.cn)
+
+如果一开始你不想安装如此多的软件也是可以的，即时不安装我们也可以进行应用的开发。但随着后续章节的学习你最好搭建这样的一套开发环境，这将会帮助你更好的进行开发。
+
+## 1.3 第一个组件
+
+在计算机编程领域里，第一个应用一般都是编写一个 "hello world" 程序。在这里，我们将编写一个显示 `hello world` 的组件。
+
+### 创建项目
+
+首先创建一个项目目录并命名为 `vue-tutorial-source`，这里我们使用 Unix 命令来创建，如果你不熟悉可以手动创建。但是作为一名开发者，我建议你学会基本的 Unix 命令。
+
+```bash
+mkdir vue-tutorial-source	// 新建项目根目录
+cd vue-tutorial-source 		// 进入根目录
+```
+
+> Unix 命令
+	使用 windows 系统的用户可能需要查看对应的 windows 命令行教程。这里主要对 Unix 命令行 -- Bash 进行说明。
+
+	命令行的基本思想很简单: 使用简短的命令就可以做很多操作，例如创建目录(`mkdir`)，移动和复制文件 (`mv` 和 `cp`)，以及切换目录浏览文件。对于习惯了图形化界面的用户可能不习惯使用命令行，但是要了解，命令行是开发者强大的工具之一，经验丰富的开发者都比较熟悉以及更愿意使用命令行来工作。更有甚者，使用完全基于命令的编辑器，如 vim、emacs。
+
+	命令行涉及很多的知识，但在本书中只使用了比较简单常用的一些命令，所以如果你不熟悉的话也不用担心。
+
+### 一些常用的 Unix 命令
+<table>
+	<thead>
+		<tr>
+			<th>作用</th>
+			<th>命令</th>
+			<th>示例</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>列出当前目录下的文件</td>
+			<td>ls</td>
+			<td>ls -l</td>
+		</tr>
+		<tr>
+			<td>新建目录</td>
+			<td>`mkdir <dirname>`</td>
+			<td>mkdir new-dir</td>
+		</tr>
+		<tr>
+			<td>切换目录</td>
+			<td>`cd <dirname>`</td>
+			<td>ls -l</td>
+		</tr>
+		<tr>
+			<td>进入上级目录</td>
+			<td></td>
+			<td>cd ..</td>
+		</tr>
+		<tr>
+			<td>删除文件</td>
+			<td>`rm <file>`</td>
+			<td>rm foo</td>
+		</tr>
+	</tbody>
+</table>
+
+接下来创建 `components` 目录存放组件文件，并在 `components`目录下创建 `helloWorld.js` 文件，同时创建 `index.html` 文件作为我们应用的入口。
+
+命令行操作
+
+```base
+touch index.html
+mkdir components
+cd components
+touch helloWorld.js
+```
+如果你不习惯命令行，使用图形界面来创建也是一样的。
+![hello-world](../static/img/hello_world.png)
+
+### 引入 Vue.js
+
+创建好目录结构后，就可以正式开发编码了，在开始之前，我们需要注意如下问题：
+
+* vue 的版本
+	软件都是有版本的概念的，不同的版本功能会有不同，大的版本还会有兼容性问题，所以我们要确定好使用的版本。本书我们使用 vue 2.2 版本作为实例讲解。
+* vue 的引入方式
+	这里我们先简单的通过 CDN 的方式引入 vue.js，后续我们会通过 npm 包管理工具以模块的方式引入 vue。
+* 编码规范问题
+	无论对于初学者或是有经验的开发者，编码规范都是很有必要且很有帮助的。这里我们参考 [vue 组件编码规范](https://github.com/pablohpsilva/vuejs-component-style-guide/blob/master/README-CN.md#目录)。
+
+
+
+
