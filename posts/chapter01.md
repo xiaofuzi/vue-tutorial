@@ -62,9 +62,9 @@ Vue.js（读音 /vjuː/，类似于 view） 是一套构建用户界面的渐进
 
 如果一开始你不想安装如此多的软件也是可以的，即时不安装我们也可以进行应用的开发。但随着后续章节的学习你最好搭建这样的一套开发环境，这将会帮助你更好的进行开发。
 
-## 1.3 第一个组件
+## 1.3 第一个 vue 应用
 
-在计算机编程领域里，第一个应用一般都是编写一个 "hello world" 程序。在这里，我们将编写一个显示 `hello world` 的组件。
+在计算机编程领域里，第一个应用一般都是编写一个 "hello world" 程序。在这里，我们将编写一个显示 `hello world` 的 vue 应用。
 
 ### 创建项目
 
@@ -144,6 +144,113 @@ touch helloWorld.js
 * 编码规范问题
 	无论对于初学者或是有经验的开发者，编码规范都是很有必要且很有帮助的。这里我们参考 [vue 组件编码规范](https://github.com/pablohpsilva/vuejs-component-style-guide/blob/master/README-CN.md#目录)。
 
+在 `index.html`文件中引入 vue，如下所示：
 
+```
+<script src="http://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+```
+
+第一个应用源码：
+```html
+<!DOCTYPE>
+<html>
+<head>
+	<title>hello world</title>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="http://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<script type="text/javascript">
+		new Vue({
+			el: '#app',
+			data: {
+				text: 'hello world!'
+			},
+			render (h) {
+				return h('h2', this.text);
+			}
+		})
+	</script>
+</body>
+</html>
+```
+
+就这样，一个简单的 vue 应用就完成了，这里会在界面上显示一个二级标题的 `hello world!` 在 id 为 app 的 div 中。
+
+下面我们来看看他是如何工作的，vue 应用通过 `new Vue()` 的方式来创建，并绑定到页面上的一个元素，这里是 id 为 app 的 div 标签。然后通过 render 函数返回渲染结果并渲染到页面上。`this.text` 可以直接去到 data 对象中的 text 属性，同时 data 中的属性还会具备响应式的特性，稍后我们在讲解这个特性。除了通过 render 函数渲染之外，还可以通过模板的形式来渲染页面。如下所示，也可以得到同样的渲染结果。
+
+```html
+<!DOCTYPE>
+<html>
+<head>
+	<title>hello world</title>
+</head>
+<body>
+	<div id="app">
+		<h2>{{text}}</h2>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<script type="text/javascript">
+		new Vue({
+			el: '#app',
+			data: {
+				text: 'hello world!'
+			}
+		})
+	</script>
+</body>
+</html>
+```
+模板的方式与 html 语法更为接近，布局也更为简洁，模板也是大多数人的选择，但 render 有更为灵活的语法，所以如果你也习惯 render 的方式的话大可以放心的用。
+
+### hello-world 组件的编写
+
+这里我们通过 vue 的 component 方法注册一个全局的组件。需要注意的是：
+
+* 组件的 data 对象通过一个函数返回，这样组件才能够实现组件复用
+* 命名，组件命名以驼峰或是横杠的方式，但在模板中引用的时候必须是横杠(驼峰对应相应的横杠形式)，这是 html 语法自身的限制，在 html 中，标签是不区分大小写的
+
+```js
+// 定义名为 hello-world 的新组件
+Vue.component('hello-world', {
+  template: '<h2>{{text}}</h2>',
+  data: function () {
+  	return {
+  		text: 'hello world!'
+  	}
+  }
+})
+```
+
+如何引用？
+
+```html
+<!DOCTYPE>
+<html>
+<head>
+	<title>hello world</title>
+</head>
+<body>
+	<div id="app">
+		<hello-world></hello-world>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<script type="text/javascript" src='./components/helloWorld.js'></script>
+	<script type="text/javascript">
+		new Vue({
+			el: '#app'
+		})
+	</script>
+</body>
+</html>
+```
+
+### 练习
+> 学会解决一个自己不会的问题是一个开发者的基本要求？ 
+
+1. 如何确认当前引入的 vue 的版本？
+2. 了解 vue 全局组件和局部组件有什么不同？
+3. 把 显示的 hello world 更改成 `how do you do?`
+4. 安装 git、nodeJS、npm？
 
 
