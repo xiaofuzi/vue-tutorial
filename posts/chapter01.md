@@ -1,5 +1,12 @@
 # 第一章 从零开始，完成一次发布
 
+* [简介](./posts/chapter01.md#11-简介)
+* [环境搭建](./posts/chapter01.md#12-环境搭建)
+* [第一个 vue 应用](./posts/chapter01.md#13-第一个-vue-应用)
+* [版本控制之 git](./posts/chapter01.md#14-版本控制之-git)
+* [应用部署](./posts/chapter01.md#15-部署)
+* [小结](./posts/chapter01.md#16-小结)
+
 本书会向你详细的介绍使用 vue.js 开发 web 应用的方方面面，包括 html、css、less、vue、vuex、版本控制、github的使用等知识。学会这些知识将帮助你胜任 Vue 相关的开发工作，同时成为一名更好的 web 开发工程师。阅读本书能让你快速学会 vue 框架的基础，包括组件的编写、指令的开发、vue-router、vuex 的使用。读完本书之后，你已经可以独立搭建 vue 技术栈项目、编写自己的组件库、深入了解 vue 背后的知识。
 
 > 脚手架: 更快、更简单、更诱人
