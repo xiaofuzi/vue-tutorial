@@ -340,11 +340,11 @@ Github 的使用方法很简单，但可能对于不熟悉的开发者来说使�
 
 按要求填写信息即可。
 
-创建好后会有相应的推送指导信息，如下:
+创建好后会有相应的推送指南信息，如下:
 
 ![push-guide](../static/img/push-guide.png)
 
-推送指导分两种情况，其一是未建立本地仓库，则按方式一处理。其二是已有本地仓库，则按方式二处理。执行对应的命令即可。
+推送指南分两部分，其一是未建立本地仓库，则按方式一处理。其二是已有本地仓库，则按方式二处理。执行对应的命令即可。
 
 如下为本书示例代码的初始仓库推送到 github 的页面, 仓库地址: [https://github.com/xiaofuzi/vue-tutorial-source](https://github.com/xiaofuzi/vue-tutorial-source)。
 
@@ -352,3 +352,112 @@ Github 的使用方法很简单，但可能对于不熟悉的开发者来说使�
 
 > 注：记得给每一个仓库添加一个 `README.md` 文件，github 默认会显示该页面作为仓库的介绍信息，这也是其他开发者了解该仓库的最好方式。
 
+### git 分支使用
+
+* 分支
+Git 分支(branch)的功能很强大，在多人协作中尤其有用。分支是对仓库的高效复制，在分支中所作的改动不会影响其它分支，这样多人开发时，每个人建立自己的分支，相互之间就不会影响。
+我们可以通过 `checkout` 命令并指定 -b 标识创建一个新的分支，如下：
+
+```
+$ git checkout -b dev
+Switched to a new branch 'dev'
+$ git branch
+  master
+* dev
+```
+
+这里，我们首先通过 checkout 命令创建了一个 dev 分支，创建后会自动切换到新建立的分支。通过 git branch 命令可以查看当前的本地分支情况，星号 (*) 表示当前所在的分支。在多人协作的时候，分支就显得尤其重要，但即使只有一个开发者，将当前工作分支和主分支(master) 隔离开，这样在添加新的改动时就可以不用顾忌改动的大小，即使出错了，切换回主分支，然后删除当前改动分支即可。
+
+> 对于比较少量的改动没必要建立新的分支，但当改动过大时，建立一个新的分支是一种很好的习惯。
+
+* 编辑
+
+我们已经创建好了新的分支，现在可以做一些改动。这里我们更新一下 `README.md` 文件，加上 `vue-tutorial` 仓库地址。
+
+新的 README 文件
+
+```
+## vue tutorial source
+
+本仓库为 vue tutorial (vue 实战教程) 项目的源码仓库。
+
+### 参考链接
+
+* [vue tutorial](https://github.com/xiaofuzi/vue-tutorial)
+```
+
+* 提交
+
+首先将改动添加到 git 当前工作区，然后通过 commit 提交改动。
+
+```
+git add .
+git commit -m 'update readme'
+```
+
+* 合并
+
+提交完本次合并后，就可以合并到主分支了:
+
+```
+git checkout master
+git merge dev
+```
+
+首先通过 checkout 命令切换到 master 分支，然后通过 merge 命令合并。合并之后 dev 分支可以清理掉，也可以保留继续使用。
+
+* 删除分支
+
+```
+git branch -d dev
+```
+
+* 推送
+
+现在把改动推送到 github 远程仓库，查看改动的效果。之前已经推送过了一次，这次可以省略 origin master 参数。
+
+```
+git push
+```
+
+如下为更新后的效果：
+
+![readme 00](../static/img/readme00.png)
+
+## 1.5 部署
+
+得益于 github 的 gh-pages 功能，我们可以很方便的将我们的应用部署在 github 上，虽然 gh-pages 功能只支持静态渲染，但已经完全满足我们的需求了。
+
+* gh-pages 分支指定
+
+首先进入仓库的 setting 选项：
+
+![gh-pages](../static/img/deploy00.png)
+
+然后找到 setting 选项的 gh-pages 设置部分:
+
+![gh-page-setting](../static/img/deploy01.png)
+
+我们可以看到，github 支持三种选项，这里我们选择 master 分支即可。
+
+设置完成后，我们的仓库就被当做一个站点部署好了。
+
+![repos website](../static/img/deploy02.png)
+
+从上图我们可以看到站点的访问地址，以及还可以选定站点主题、自定义域名、是否开启 https等。
+
+> 这里因为我已经配置了自定义域名，所以站点地址会与你的有所不同，如果未配置过域名，那么访问地址应该是 [github 账号名] + '.github.io/' + [仓库名] 的格式。如果配置了自定义域名，则是 [域名] + [仓库名]。gh-pages 是通过 jekyll 来渲染的，一个基于 ruby 的静态博客生成器，如果你对它了解，可以进一步的自定义站点模板。不过在这里的话，我们并不需要主题功能，所以就不在说明。
+
+查看部署结果：
+
+![hello world site](../static/img/deploy03.png)
+
+## 练习
+
+1. 按照本章示例完成 hello world 应用并部署到 github 上？
+2. 服务端渲染和客户端渲染的区别？
+3. 听说过 webpack 吗？它的作用是什么？
+
+## 1.6 小结
+
+这一章我们学习了安装、搭建环境、版本控制以及部署到 github 的功能。下一章，我们会在此基础上编写一个更为完整的应用，你也会接触到更多的 Vue.js 的知识，让你体会 Vue.js 的魅力。
